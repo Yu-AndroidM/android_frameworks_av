@@ -70,6 +70,7 @@ LOCAL_SRC_FILES:=                         \
         XINGSeeker.cpp                    \
         avc_utils.cpp                     \
         APE.cpp                           \
+        FFMPEGSoftCodec.cpp               \
 
 LOCAL_C_INCLUDES:= \
         $(TOP)/frameworks/av/include/media/ \
@@ -142,6 +143,9 @@ endif
 endif
 
 LOCAL_CLANG := true
+
+# FFMPEG plugin
+LOCAL_C_INCLUDES += $(TOP)/external/stagefright-plugins/include
 
 LOCAL_MODULE:= libstagefright
 
