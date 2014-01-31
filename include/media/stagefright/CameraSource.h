@@ -92,6 +92,8 @@ public:
     virtual status_t read(
             MediaBuffer **buffer, const ReadOptions *options = NULL);
 
+    virtual status_t pause();
+
     /**
      * Check whether a CameraSource object is properly initialized.
      * Must call this method before stop().
@@ -205,6 +207,11 @@ private:
     int64_t mGlitchDurationThresholdUs;
     bool mCollectStats;
     bool mIsMetaDataStoredInVideoBuffers;
+
+    int64_t  mPauseAdjTimeUs;
+    int64_t  mPauseStartTimeUs;
+    int64_t  mPauseEndTimeUs;
+    bool mRecPause;
 
     void releaseQueuedFrames();
     void releaseOneRecordingFrame(const sp<IMemory>& frame);
