@@ -142,15 +142,9 @@ void AVNuUtils::checkFormatChange(bool * /*formatChange*/,
         const sp<ABuffer> & /*accessUnit*/) {
 }
 
-uint32_t AVNuUtils::getFlags() {
-    return 0;
+void AVNuUtils::addFlagsInMeta(const sp<ABuffer> & /*buffer*/,
+        int32_t /*flags*/, bool /*isAudio*/) {
 }
-
-bool AVNuUtils::canUseSetBuffers(const sp<MetaData> &/*Meta*/) {
-    return false;
-}
-
-bool AVNuUtils::dropCorruptFrame() { return false; }
 
 // ----- NO TRESSPASSING BEYOND THIS LINE ------
 AVNuUtils::AVNuUtils() {}
@@ -162,4 +156,3 @@ AVNuUtils *AVNuUtils::sInst =
         ExtensionsLoader<AVNuUtils>::createInstance("createExtendedNuUtils");
 
 } //namespace android
-

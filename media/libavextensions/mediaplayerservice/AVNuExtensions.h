@@ -85,7 +85,7 @@ struct AVNuUtils {
 
     virtual void printFileName(int fd);
     virtual void checkFormatChange(bool *formatChange, const sp<ABuffer> &accessUnit);
-    virtual bool dropCorruptFrame();
+    virtual void addFlagsInMeta(const sp<ABuffer> &buffer, int32_t flags, bool isAudio);
 
     // ----- NO TRESSPASSING BEYOND THIS LINE ------
     DECLARE_LOADABLE_SINGLETON(AVNuUtils);
