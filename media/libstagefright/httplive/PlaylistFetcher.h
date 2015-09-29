@@ -249,11 +249,11 @@ private:
 
     void updateDuration();
     void updateTargetDuration();
-
+    virtual bool checkSwitchBandwidth() { return false; }
+    virtual bool getSeqNumberInLiveStreaming() { return false; }
     DISALLOW_EVIL_CONSTRUCTORS(PlaylistFetcher);
 };
 
 }  // namespace android
 
 #endif  // PLAYLIST_FETCHER_H_
-
