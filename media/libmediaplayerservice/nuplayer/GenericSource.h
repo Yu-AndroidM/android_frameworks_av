@@ -126,6 +126,7 @@ private:
     bool mAudioIsVorbis;
     bool mIsWidevine;
     bool mIsSecure;
+    bool mUseSetBuffers;
     bool mIsStreaming;
     bool mUIDValid;
     uid_t mUID;

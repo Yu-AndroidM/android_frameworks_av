@@ -52,7 +52,8 @@ uint32_t MediaExtractor::flags() const {
 
 // static
 sp<MediaExtractor> MediaExtractor::Create(
-        const sp<DataSource> &source, const char *mime) {
+        const sp<DataSource> &source, const char *mime,
+        const uint32_t flags) {
     sp<AMessage> meta;
 
     String8 tmp;
@@ -90,9 +91,9 @@ sp<MediaExtractor> MediaExtractor::Create(
             return NULL;
         }
     }
-
-    MediaExtractor *ret = NULL;
-    if (!strcasecmp(mime, MEDIA_MIMETYPE_CONTAINER_MPEG4)
+    sp<MediaExtractor> ret = NULL;
+    if ((ret = AVFactory::get()->createExtendedExtractor(source, mime, meta, flags)) != NULL) {
+    } else if (!strcasecmp(mime, MEDIA_MIMETYPE_CONTAINER_MPEG4)
             || !strcasecmp(mime, "audio/mp4")) {
         ret = new MPEG4Extractor(source);
     } else if (!strcasecmp(mime, MEDIA_MIMETYPE_AUDIO_MPEG)) {
@@ -121,6 +122,7 @@ sp<MediaExtractor> MediaExtractor::Create(
         ret = new MidiExtractor(source);
     }
 
+    ret = AVFactory::get()->updateExtractor(ret, source, mime, meta, flags);
     if (ret != NULL) {
        if (isDrm) {
            ret->setDrmFlag(true);
