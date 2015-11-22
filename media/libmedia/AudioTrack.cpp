@@ -32,6 +32,7 @@
 #include <media/AudioResamplerPublic.h>
 #include "media/AVMediaExtensions.h"
 #include <cutils/properties.h>
+
 #define WAIT_PERIOD_MS                  10
 #define WAIT_STREAM_END_TIMEOUT_SEC     120
 static const int kMaxLoopCountNotifications = 32;

@@ -806,6 +806,12 @@ void CameraClient::handleShutter(void) {
         ICameraServiceProxy::CAMERA_STATE_IDLE,
         String8::format("%d", mCameraId));
 
+    // Shutters only happen in response to takePicture, so mark device as
+    // idle now, until preview is restarted
+    mCameraService->updateProxyDeviceState(
+        ICameraServiceProxy::CAMERA_STATE_IDLE,
+        String8::format("%d", mCameraId));
+
     mLock.unlock();
 }
 

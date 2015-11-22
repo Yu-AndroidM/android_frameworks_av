@@ -51,6 +51,8 @@
 
 #include <dlfcn.h>
 
+#include <stagefright/AVExtensions.h>
+
 namespace android {
 
 static void *loadExtractorPlugin() {
@@ -229,6 +231,24 @@ void Sniffer::registerSnifferPlugin() {
         mExtraSniffers.push_back(plugin->sniff);
     }
 }
+
+void Sniffer::registerDefaultSniffers() {
+    Mutex::Autolock autoLock(mSnifferMutex);
+
+    registerSniffer_l(SniffMPEG4);
+    registerSniffer_l(SniffMatroska);
+    registerSniffer_l(SniffOgg);
+    registerSniffer_l(SniffWAV);
+    registerSniffer_l(SniffFLAC);
+    registerSniffer_l(SniffAMR);
+    registerSniffer_l(SniffMPEG2TS);
+    registerSniffer_l(SniffMP3);
+    registerSniffer_l(SniffAAC);
+    registerSniffer_l(SniffMPEG2PS);
+    registerSniffer_l(SniffWVM);
+    registerSniffer_l(SniffMidi);
+    registerSniffer_l(AVUtils::get()->getExtendedSniffer());
+    registerSnifferPlugin();
 
 void Sniffer::registerDefaultSniffers() {
     Mutex::Autolock autoLock(mSnifferMutex);
